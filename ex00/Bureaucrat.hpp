@@ -19,7 +19,7 @@ public:
 class Bureaucrat 
 {
 private:
-    std::string const _name;
+    const std::string _name;
     int _grade;
     
 public:
@@ -34,8 +34,8 @@ public:
     int getGrade() const;
 
     //member functions
-    void incrementGrade(int value);
-    void decrementGrade(int value);
+    void incrementGrade();
+    void decrementGrade();
 };
 
 //overloaded insertion operator

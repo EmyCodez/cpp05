@@ -10,7 +10,7 @@ const char* GradeTooLowException::what() const throw() {
 
 Bureaucrat::Bureaucrat() :_name("Default"), _grade(150){}
 
-Bureaucrat::Bureaucrat(const std::string &name, int grade) :_name(name)
+Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name.empty()? "Default" : name)
 {
     if (grade < 1)
         throw GradeTooHighException();
@@ -41,16 +41,16 @@ int Bureaucrat::getGrade() const {
 }
 
 //member functions
-void Bureaucrat::incrementGrade(int value) {
-    if(_grade - value < 1)
+void Bureaucrat::incrementGrade() {
+    if(_grade - 1 < 1)
         throw GradeTooHighException();
-    _grade -= value;    
+    _grade--;    
 }
 
-void Bureaucrat::decrementGrade(int value) {
-    if (_grade + value > 150)
+void Bureaucrat::decrementGrade() {
+    if (_grade + 1 > 150)
            throw GradeTooLowException();
-    _grade += value;    
+    _grade++;    
 }
 
 
