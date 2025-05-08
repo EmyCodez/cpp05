@@ -3,19 +3,19 @@
 
 // Exception class definitions
 const char* Form::GradeTooHighException::what() const throw() {
-    return "Form grade is too high!";
+    return "Grade is too high to sign form!";
 }
 
 const char* Form::GradeTooLowException::what() const throw() {
-    return "Form grade is too low!";
+    return "Grade is too low to sign form!";
 }
 
 // Constructor
 Form::Form()
-    : _name("Default"), _isSigned(false), _gradeToSign(150), _gradeToExecute(150) {}
+    : _name("Default Form"), _isSigned(false), _gradeToSign(150), _gradeToExecute(150) {}
 
 Form::Form(const std::string& name, int gradeToSign, int gradeToExecute)
-    : _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
+    : _name(name.empty() ? "Default Form" : name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
     if (gradeToSign < 1 || gradeToExecute < 1) {
         throw GradeTooHighException();
     }
