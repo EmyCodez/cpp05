@@ -4,17 +4,28 @@
 
 // Exception class definitions
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-    return "Grade too high!";
+    return "Bureaucrat::Grade too high!";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-    return "Grade too low!";
+    return "Bureaucrat::Grade too low!";
 }
 
 // Constructors
 Bureaucrat::Bureaucrat() :_name("Default"), _grade(150) {}
 
-Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name.empty() ? "Default" : name) {
+Bureaucrat::Bureaucrat(const std::string& name, int grade) 
+        : _name(name.empty() ? "Default Bureaucrat" : name) {
+    if (grade < 1) {
+        throw GradeTooHighException();
+    } else if (grade > 150) {
+        throw GradeTooLowException();
+    }
+    this->_grade = grade;
+}
+
+Bureaucrat::Bureaucrat(const char *name, int grade) 
+        : _name( (!name || std::string(name).empty()) ? "Default Bureaucrat" : name) {
     if (grade < 1) {
         throw GradeTooHighException();
     } else if (grade > 150) {

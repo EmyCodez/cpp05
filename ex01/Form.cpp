@@ -3,11 +3,11 @@
 
 // Exception class definitions
 const char* Form::GradeTooHighException::what() const throw() {
-    return "Grade is too high to sign form!";
+    return "Form::GradeTooHighException:- grade is higher than required!";
 }
 
 const char* Form::GradeTooLowException::what() const throw() {
-    return "Grade is too low to sign form!";
+    return "Form::GradeTooLowException:- grade is lower than required!";
 }
 
 // Constructor
@@ -16,6 +16,16 @@ Form::Form()
 
 Form::Form(const std::string& name, int gradeToSign, int gradeToExecute)
     : _name(name.empty() ? "Default Form" : name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
+    if (gradeToSign < 1 || gradeToExecute < 1) {
+        throw GradeTooHighException();
+    }
+    if (gradeToSign > 150 || gradeToExecute > 150) {
+        throw GradeTooLowException();
+    }
+}
+
+Form::Form(const char*  name, int gradeToSign, int gradeToExecute)
+    : _name((!name || std::string(name).empty() ? "Default Form" : name)), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
     if (gradeToSign < 1 || gradeToExecute < 1) {
         throw GradeTooHighException();
     }
@@ -71,3 +81,4 @@ std::ostream& operator<<(std::ostream& os, const Form& form) {
        << ", Grade to execute: " << form.getGradeRequiredToExecute();
     return os;
 }
+

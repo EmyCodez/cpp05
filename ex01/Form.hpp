@@ -28,6 +28,7 @@ public:
     // Constructor
     Form();
     Form(const std::string& name, int gradeToSign, int gradeToExecute);
+    Form(const char* name, int gradeToSign, int gradeToExecute);
     Form(const Form& other);
     Form& operator= (const Form& other);
     ~Form();
