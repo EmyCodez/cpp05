@@ -24,7 +24,7 @@ int main()
        std::cout << b3 << std::endl;
 
      }catch (std::exception &e) {
-       std::cout << "Exception: " << e.what() << std::endl;
+       std::cout << "Exception " << e.what() << std::endl;
      }
 
      // Invalid Cases

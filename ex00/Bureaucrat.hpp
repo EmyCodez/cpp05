@@ -1,39 +1,38 @@
-# ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef BUREAUCRAT_HPP
+#define BUREAUCRAT_HPP
 
-# include <iostream>
-# include <exception>
+#include <iostream>
+#include <exception>
 
-class GradeTooHighException : public std::exception
-{
-public:
-    const char* what() const throw();
-};
-
-class GradeTooLowException : public std::exception
-{
-public:
-    const char* what() const throw();
-};
-
-class Bureaucrat 
-{
+class Bureaucrat {
 private:
     const std::string _name;
     int _grade;
-    
+
 public:
+    // Exception classes
+    class GradeTooHighException : public std::exception {
+    public:
+        const char* what() const throw();
+    };
+
+    class GradeTooLowException : public std::exception {
+    public:
+        const char* what() const throw();
+    };
+    
     Bureaucrat();
-    Bureaucrat(const std::string &name, int grade);
-    Bureaucrat(const Bureaucrat &other);
-    Bureaucrat &operator= (const Bureaucrat &other);
+    Bureaucrat(const std::string& name, int grade);
+    Bureaucrat(const char* name, int grade);
+    Bureaucrat(const Bureaucrat& other);
+    Bureaucrat& operator=(const Bureaucrat& other);
     ~Bureaucrat();
 
-    //getters
+    // Getter functions
     const std::string& getName() const;
     int getGrade() const;
 
-    //member functions
+    // Member functions
     void incrementGrade();
     void decrementGrade();
 };
@@ -41,4 +40,4 @@ public:
 //overloaded insertion operator
 std::ostream &operator<< (std::ostream &os, const Bureaucrat &other);
 
-# endif
+#endif // BUREAUCRAT_HPP
