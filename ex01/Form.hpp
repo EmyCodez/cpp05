@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-class Bureaucrat;  // Forward declaration
+class Bureaucrat;  
 
 class Form {
 private:

@@ -2,20 +2,27 @@
 #include "Bureaucrat.hpp"
 
 // Exception class definitions
+#include "AForm.hpp"
+
+// Implement all what() messages
 const char* AForm::GradeTooHighException::what() const throw() {
-    return "AForm::GradeTooHighException- grade is higher than required!";
+    return "AForm::Grade is too high.";
 }
 
 const char* AForm::GradeTooLowException::what() const throw() {
-    return "AForm::GradeTooLowException- grade is lower than required!";
+    return "AForm::Grade is too low.";
 }
 
 const char* AForm::FormNotSignedException::what() const throw() {
-    return "AForm::FormNotSignedException- form is not signed!";
+    return "AForm::Form has not been signed.";
 }
 
 const char* AForm::FileNotOpenedException::what() const throw() {
-    return "AForm::FileNotOpenedException- file could not be opened!";
+    return "AForm::File could not be opened.";
+}
+
+const char* AForm::EmptyTargetException::what() const throw() {
+    return "AForm::Target cannot be empty.";
 }
 
 // Constructor

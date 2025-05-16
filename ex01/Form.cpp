@@ -3,11 +3,11 @@
 
 // Exception class definitions
 const char* Form::GradeTooHighException::what() const throw() {
-    return "Form::GradeTooHighException:- grade is higher than required!";
+    return "Form::Grade is higher than required!";
 }
 
 const char* Form::GradeTooLowException::what() const throw() {
-    return "Form::GradeTooLowException:- grade is lower than required!";
+    return "Form::Grade is lower than required!";
 }
 
 // Constructor

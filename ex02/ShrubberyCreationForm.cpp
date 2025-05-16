@@ -3,28 +3,30 @@
 # include <iostream>
 # include <fstream>
 
-const char* ShrubberyCreationForm::EmptyTargetException::what() const throw() {
-    return "ShrubberyCreationForm::EmptyTargetException- Target cannot not be empty!";
-}
-
 ShrubberyCreationForm::ShrubberyCreationForm() 
-    : AForm("ShrubberyCreationForm", 145, 137), _target("Default Target"){}
+    : AForm("ShrubberyCreationForm", 145, 137)
+    {
+        if (_target.empty())
+        throw AForm::EmptyTargetException();
+    }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
     : AForm("ShrubberyCreationForm", 145, 137),
-     _target(target.empty() ? "Default Target" : target) {}
+     _target(target.empty() ? throw AForm::EmptyTargetException() : target) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const char * target)
-     : AForm("ShrubberyCreationForm", 145, 137),
-      _target( (!target || std::string(target).empty() ? throw EmptyTargetException() : target)) {}     
+    : AForm("ShrubberyCreationForm", 145, 137),
+      _target( (!target || std::string(target).empty() ? throw AForm::EmptyTargetException() : target)) {}     
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) :_target(other._target){}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) 
+    : AForm(other), _target(other._target){}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator = (const ShrubberyCreationForm &other) 
 {
     if (this != &other) {
-        this->_target = other._target;
-}
+        AForm::operator=(other); 
+        _target = other._target;
+    }
 return *this;
 }
 
@@ -50,7 +52,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
             << "   \\|//\\|/\\|/,\\\\|/|// \\|/ \\|//\\|/\\|/,\\\\|/|/|// \\|/\n"
             << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
         file.close();
-        std::cout << "Shrubbery created at " << _target << "_shrubbery" << std::endl;
+        std::cout << GREEN << "Shrubbery created at " << _target << "_shrubbery" << RESET << std::endl;
     } else {
         throw FileNotOpenedException();
     }

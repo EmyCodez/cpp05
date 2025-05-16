@@ -4,26 +4,18 @@
 #include "AForm.hpp"
 #include <fstream>
 
-class ShrubberyCreationForm : public AForm 
-{
+class ShrubberyCreationForm : public AForm {
 private:
     std::string _target;
 
-    public:
-
-    class EmptyTargetException : public std::exception {
-        public:
-            const char* what() const throw();
-        };
-
+public:
     ShrubberyCreationForm();
     ShrubberyCreationForm(const std::string &target);
-    ShrubberyCreationForm(const char * target);
+    ShrubberyCreationForm(const char* target);
     ShrubberyCreationForm(const ShrubberyCreationForm &other);
-    ShrubberyCreationForm& operator = (const ShrubberyCreationForm &other);
+    ShrubberyCreationForm& operator=(const ShrubberyCreationForm &other);
     ~ShrubberyCreationForm();
 
-    //member functions
     void execute(Bureaucrat const &executor) const;
 };
 

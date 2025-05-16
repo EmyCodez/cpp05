@@ -1,10 +1,18 @@
 #ifndef AFORM_HPP
 #define AFORM_HPP
 
-#include <string>
 #include <iostream>
+#include <string>
+#include <exception>
 
-class Bureaucrat;  
+#define YELLOW "\033[33m"
+#define GREEN "\033[32m"
+#define RED   "\033[31m"
+#define RESET  "\033[0m"
+
+
+
+class Bureaucrat;
 
 class AForm {
 private: 
@@ -26,16 +34,21 @@ public:
     };
 
     class FormNotSignedException : public std::exception {
-        public:
-            const char* what() const throw();
-        };
-    
+    public:
+        const char* what() const throw();
+    };
+
     class FileNotOpenedException : public std::exception {
-        public:
-            const char* what() const throw();
-        };    
-        
-    // Constructor
+    public:
+        const char* what() const throw();
+    };
+
+    class EmptyTargetException : public std::exception {
+    public:
+        const char* what() const throw();
+    };
+
+    // Constructors / Destructor
     AForm();
     AForm(const std::string& name, int gradeToSign, int gradeToExecute);
     AForm(const char* name, int gradeToSign, int gradeToExecute);
@@ -49,15 +62,14 @@ public:
     int getGradeToSign() const;
     int getGradeToExecute() const;
 
-    // Function to sign the form
+    // Form signing
     void beSigned(const Bureaucrat& bureaucrat);
 
-    // Virtual functions
-    virtual void execute(Bureaucrat const & executor) const = 0;
-   
+    // Execution interface
+    virtual void execute(Bureaucrat const& executor) const = 0;
 };
 
- // Operator overload for printing
- std::ostream& operator << (std::ostream& os, const AForm& other);
+// Output stream operator
+std::ostream& operator<<(std::ostream& os, const AForm& form);
 
 #endif 
