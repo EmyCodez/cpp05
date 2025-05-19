@@ -4,10 +4,6 @@
 #include <cstdlib>
 #include <ctime>
 
-#define YELLOW "\033[33m"
-#define RESET  "\033[0m"
-
-
 //Constructors
 RobotomyRequestForm::RobotomyRequestForm()
 : AForm("RobotomyRequestForm", 72, 45)
@@ -49,7 +45,7 @@ void RobotomyRequestForm::execute(Bureaucrat const& executor) const {
         throw AForm::GradeTooLowException();
 
     std::cout << YELLOW << "Bzzzzzz... *drilling noises*" << RESET << std::endl;
-
+    std::srand(std::time(NULL));
     if (std::rand() % 2 == 0) {
             std::cout << YELLOW << _target << " has been robotomized successfully!" << RESET << std::endl;
     } else {

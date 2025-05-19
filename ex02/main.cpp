@@ -4,6 +4,7 @@
 # include "AForm.hpp"
 # include "ShrubberyCreationForm.hpp"
 # include "RobotomyRequestForm.hpp"
+# include "PresidentialPardonForm.hpp"
 
 int main()
 {
@@ -39,7 +40,6 @@ int main()
   
     // -------------- RobotomyRequestForm --------------- //
     std::cout << RED << "\n============ Robotomy Request =========\n" << RESET;
-    std::srand(std::time(NULL)); 
     std::cout << "Case 1: Valid grade \n";
     try
     {
@@ -66,6 +66,29 @@ int main()
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
+    }
+    std::cout << RED << "\n============ Presidential Pardon =========\n" << RESET;
+    std::cout << "Case 1: Valid grade \n";
+    try {
+        Bureaucrat bureaucrat("Zaphod", 1);
+        std::cout << bureaucrat;
+        PresidentialPardonForm pardon("Joey"); 
+        bureaucrat.signForm(pardon);
+        bureaucrat.executeForm(pardon); 
+    }
+    catch (const AForm::EmptyTargetException& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;  
+    }
+    std::cout << "\nCase 2: Invalid grade \n";
+    try {
+        Bureaucrat bob("Bob", 15);
+        std::cout << bob;
+        PresidentialPardonForm pardon("Joey"); 
+        bob.signForm(pardon);
+        bob.executeForm(pardon); 
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
    
 }
