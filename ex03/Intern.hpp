@@ -4,6 +4,12 @@
 #include "AForm.hpp"
 
 class Intern {
+
+private:
+    static AForm* createPresidentialForm(const std::string& target);
+    static AForm* createRobotomyForm(const std::string& target);
+    static AForm* createShrubberyForm(const std::string& target); 
+
 public:
     Intern();
     Intern(const Intern& other);

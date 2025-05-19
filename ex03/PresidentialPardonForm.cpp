@@ -1,7 +1,6 @@
 # include "PresidentialPardonForm.hpp"
 # include "Bureaucrat.hpp"
 # include <iostream>
-# include <ctime>
 
 PresidentialPardonForm::PresidentialPardonForm()
     : AForm("Presidential Pardon", 25, 5),_target("") {
